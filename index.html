@@ -472,6 +472,39 @@
             });
         }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const nikInput = document.querySelector('.nik');
+
+            function removeDashes(value) {
+                return value.replace(/-/g, '');
+            }
+
+            nikInput.addEventListener('input', function(e) {
+                const cursorPosition = e.target.selectionStart;
+                const originalValue = e.target.value;
+                const cleanValue = removeDashes(originalValue);
+
+                if (originalValue !== cleanValue) {
+                    e.target.value = cleanValue;
+                    const dashesRemoved = originalValue.length - cleanValue.length;
+                    e.target.setSelectionRange(cursorPosition - dashesRemoved, cursorPosition - dashesRemoved);
+                }
+            });
+
+            nikInput.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pasteData = (e.clipboardData || window.clipboardData).getData('text');
+                const cleanData = removeDashes(pasteData);
+
+                const start = e.target.selectionStart;
+                const end = e.target.selectionEnd;
+                const currentValue = e.target.value;
+
+                e.target.value = currentValue.substring(0, start) + cleanData + currentValue.substring(end);
+                e.target.setSelectionRange(start + cleanData.length, start + cleanData.length);
+            });
+        });
+
     </script>
 </body>
 </html>
