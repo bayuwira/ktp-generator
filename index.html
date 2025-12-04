@@ -326,14 +326,15 @@
   }
 
   function generateDOB() {
-    // Calculate the minimum(78 yrs age) and maximum(18 yrs age) timestamps for the desired age range
-    const minTimestamp = Date.now() - (78 * 365 * 24 * 60 * 60 * 1000);
-    const maxTimestamp = Date.now() - (18 * 365 * 24 * 60 * 1000);
-    // Generate a random timestamp between the minimum and maximum
-    const randomTimestamp = Math.floor(Math.random() * (maxTimestamp - minTimestamp + 1)) + minTimestamp;
-    // Create a new Date object using the random timestamp
-    const dob = new Date(randomTimestamp);
-    return dob;
+    const now = new Date();
+
+    const maxDate = new Date(now.getFullYear() - 17, now.getMonth(), now.getDate());
+    const minDate = new Date(now.getFullYear() - 78, now.getMonth(), now.getDate());
+
+    // Ensure integer timestamp
+    const randomTimestamp = Math.floor(Math.random() * (maxDate - minDate) + minDate.getTime());
+
+    return new Date(randomTimestamp);
   }
 
   function generateNIK(gender, provinceCode, regencyCode) {
@@ -344,6 +345,43 @@
     const randomSerialNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     const nik = `${provinceCode}${regencyCode}${randomBirthDay}${randomBirthMonth}${randomBirthYear}${randomSerialNumber}`;
     return { nik, dob: dobDate };
+  }
+
+  function generateKTP() {
+    // Sample location map (you can expand as needed)
+    const regionCodes = [
+      { prov: "31", city: "73", district: "01" }, // Jakarta Selatan
+      { prov: "32", city: "71", district: "05" }, // Bandung
+      { prov: "36", city: "72", district: "02" }, // Tangerang
+      { prov: "35", city: "78", district: "04" }, // Surabaya
+      { prov: "33", city: "74", district: "03" }, // Semarang
+    ];
+
+    // Pick random region
+    const region = regionCodes[Math.floor(Math.random() * regionCodes.length)];
+
+    // Random gender (0 = Male, 1 = Female)
+    const isFemale = Math.random() > 0.5;
+
+    const dob = generateDOB();
+    const day = dob.getDate();
+    const month = (dob.getMonth() + 1).toString().padStart(2, "0");
+    const year = dob.getFullYear().toString().slice(-2);
+
+    // Apply +40 rule for females
+    const ktpDay = (isFemale ? day + 40 : day).toString().padStart(2, "0");
+
+    // Random last four digits (not zero padded beyond 4 digits)
+    const serial = Math.floor(1 + Math.random() * 9999).toString().padStart(4, "0");
+
+    const nik = `${region.prov}${region.city}${region.district}${ktpDay}${month}${year}${serial}`;
+
+    return {
+      nik,
+      isFemale,
+      dob: dob.toISOString().split("T")[0],
+      lokasi: region
+    };
   }
 
   function formatDate(date) {
@@ -404,6 +442,7 @@
 
       var selectedProvince = getRandomProvince();
       var selectedRegency = getRandomRegency(selectedProvince);
+
       var rndInt = randomIntFromInterval(0, userImages.length - 1);
       var singleUserSource = userImages[rndInt];
       var generatedNIK = generateNIK(singleUserSource.gender, selectedProvince.code, selectedRegency.code);
@@ -414,7 +453,7 @@
       document.getElementById("provinceDisplay").textContent = selectedProvince.name + " - " + selectedRegency.name;
 
       document.getElementsByClassName("profileimg")[0].src = "./" + singleUserSource.source
-      document.getElementsByClassName("nik")[0].value = generatedNIK.nik
+      document.getElementsByClassName("nik")[0].value = generateKTP().nik
       document.getElementsByClassName("name")[0].value = randomName.toUpperCase()
       document.getElementsByClassName("region")[0].value = "SINGARAJA" + ","
       document.getElementsByClassName("dob")[0].value = formatDate(generatedNIK.dob)
