@@ -13,149 +13,104 @@
     }
 
     html {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
       box-sizing: border-box;
-    }
-
-    body {
-      background-color: #1d86a4;
     }
 
     *,
     *:before,
     *:after {
-      -webkit-box-sizing: inherit;
-      -moz-box-sizing: inherit;
       box-sizing: inherit;
     }
 
+    body {
+      background-color: #a83232;
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
     .parentBox {
-      height: 96vh;
+      flex-grow: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 1rem;
     }
 
     .box {
-      height: 600px;
-      width: 600px;
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
       background-image: url("assets/ktp_template_region.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-      /* position: relative; */
-      transform: scale(1);
+      transform-origin: center;
     }
 
     input {
       position: absolute;
       background: transparent;
       border: none;
-      font-family: Arial;
-      font-size: 12px;
+      font-family: Arial, sans-serif;
+      font-size: calc(12px * (1vw + 0.5vh));
       font-weight: normal;
       text-transform: uppercase;
       transform: skew(0deg, -1.3deg);
       color: transparent;
       text-shadow: 0 0 1px rgba(0, 0, 0, 1);
+      padding: 0;
+      margin: 0;
     }
 
-    .nik {
+    .province, .regency, .nik {
       font-family: ocr;
-      left: 206px;
-      top: 201px;
-      font-size: 20px;
+      font-size: 18px;
+      text-align: center;
+      width: 40%;
     }
 
-    .name {
-      left: 220px;
-      top: 233px;
-    }
-
-    .region {
-      left: 220px;
-      top: 246px;
-    }
-
-    .dob {
-      left: 300px;
-      top: 245px;
-    }
-
-    .jenis {
-      left: 220px;
-      top: 260px;
-    }
-
-    .golDarah {
-      left: 390px;
-      top: 257px;
-    }
-
-    .alamat {
-      left: 220px;
-      top: 273px;
-    }
-
-    .rt {
-      left: 220px;
-      top: 286px;
-    }
-
-    .kel {
-      left: 220px;
-      top: 300px;
-    }
-
-    .kec {
-      left: 220px;
-      top: 313px;
-    }
-
-    .agama {
-      left: 220px;
-      top: 326px;
-    }
-
-    .status {
-      left: 220px;
-      top: 338px;
-    }
-
-    .pek {
-      left: 221px;
-      top: 351px;
-    }
-
-    .kew {
-      left: 221px;
-      top: 365px;
-    }
-
-    .ber {
-      left: 221px;
-      top: 378px;
-    }
+    .province { left: 31.6%; top: 27.5%; }
+    .regency { left: 31.6%; top: 30%; }
+    .nik { left: 30.3%; top: 34.5%; }
+    .name { left: 36.6%; top: 38.8%; }
+    .region { left: 36.6%; top: 41%; }
+    .dob { left: 50%; top: 40.8%; }
+    .jenis { left: 36.6%; top: 43.3%; }
+    .golDarah { left: 65%; top: 42.8%; }
+    .alamat { left: 36.6%; top: 45.5%; }
+    .rt { left: 36.6%; top: 47.6%; }
+    .kel { left: 36.6%; top: 50%; }
+    .kec { left: 36.6%; top: 52.1%; }
+    .agama { left: 36.6%; top: 54.3%; }
+    .status { left: 36.6%; top: 56.3%; }
+    .pek { left: 36.8%; top: 58.5%; }
+    .kew { left: 36.8%; top: 60.8%; }
+    .ber { left: 36.8%; top: 63%; }
 
     .photoContainer {
       position: absolute;
       display: flex;
       flex-direction: column;
       align-items: center;
-      left: 422px;
-      top: 215px;
+      left: 70.3%;
+      top: 35.8%;
       transform: skew(0deg, -1.3deg);
+      width: 17.8%;
     }
 
     .profileimg {
-      height: 135px;
-      width: 107px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 107 / 135;
       filter: blur(1px);
     }
 
     .scaleBox {
       position: fixed;
-      right: 120px;
+      right: 20px;
       top: 20px;
       z-index: 1000;
       display: flex;
@@ -165,14 +120,15 @@
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      max-width: 250px;
-      min-width: 200px;
+      width: 200px;
     }
 
-    .scaleBox > input {
+    .scaleBox > input[type="range"] {
       width: 100%;
-      padding: 5px;
-      margin: 5px 0;
+      position: static;
+      transform: none;
+      color: inherit;
+      text-shadow: none;
     }
 
     .regenerateBtn {
@@ -203,8 +159,8 @@
 
     .provinceInfo {
       position: fixed;
-      left: 30px;
-      top: 30px;
+      left: 20px;
+      top: 20px;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.9);
       padding: 15px;
@@ -212,6 +168,7 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       font-weight: bold;
       color: #333;
+      max-width: 250px;
     }
 
     .provinceInfo .label {
@@ -223,76 +180,56 @@
     .provinceInfo .value {
       font-size: 14px;
       color: #1d86a4;
+      word-wrap: break-word;
     }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
-      .scaleBox {
-        right: 10px;
-        bottom: 10px;
-        max-width: 180px;
-        min-width: 150px;
-        padding: 10px;
+      body {
+        flex-direction: column;
       }
-
+      .parentBox {
+        order: 1;
+        padding-bottom: 150px; /* Space for controls */
+      }
+      .provinceInfo, .scaleBox {
+        position: fixed;
+        bottom: 10px;
+        top: auto;
+        width: calc(50% - 15px);
+      }
       .provinceInfo {
         left: 10px;
-        top: 10px;
-        padding: 10px;
-        max-width: 200px;
+        right: auto;
       }
-
-      .regenerateBtn {
-        font-size: 11px;
-        padding: 6px 10px;
+      .scaleBox {
+        right: 10px;
+        left: auto;
       }
+      input { font-size: 1.8vw; }
+      .province, .regency, .nik { font-size: 2.5vw; }
     }
 
     @media (max-width: 480px) {
-      .scaleBox {
-        right: 5px;
-        bottom: 5px;
-        max-width: 150px;
-        min-width: 120px;
+      input { font-size: 2.5vw; }
+      .province, .regency, .nik { font-size: 3.5vw; }
+      .provinceInfo, .scaleBox {
+        width: calc(50% - 10px);
       }
-
-      .provinceInfo {
-        left: 5px;
-        top: 5px;
-        max-width: 180px;
-      }
-    }
-
-    .province {
-      font-family: ocr;
-      left: 190px;
-      top: 165px;
-      font-size: 20px;
-      text-align: center;
-    }
-
-    .regency {
-      font-family: ocr;
-      left: 190px;
-      top: 180px;
-      font-size: 20px;
-      text-align: center;
+      .provinceInfo { left: 5px; }
+      .scaleBox { right: 5px; }
     }
   </style>
 </head>
 
 <body>
 <div class="parentBox">
-  <div class="provinceInfo">
-    <div class="label">Current Province & Regency:</div>
-    <div class="value" id="provinceDisplay">Loading...</div>
-  </div>
   <div id="ktp" class="box">
     <div class="photoContainer">
-      <img class="profileimg" src="">
+      <img class="profileimg" src="" alt="Profile Photo">
       <div class="shrtdisc">
         <input type="text" class="region2" value="">
-        </br>
+        <br>
         <input type="text" class="tem" value="">
       </div>
     </div>
@@ -314,11 +251,15 @@
     <input type="text" class="kew" value="">
     <input type="text" class="ber" value="">
   </div>
-  <div class="scaleBox">
-    <div class="controlLabel">Scale</div>
-    <input type="range" id="scale" min="0.25" max="3" step="0.01" value="1">
-    <button class="regenerateBtn" onclick="generateNewKTP()">Generate New KTP</button>
-  </div>
+</div>
+<div class="provinceInfo">
+  <div class="label">Current Province & Regency:</div>
+  <div class="value" id="provinceDisplay">Loading...</div>
+</div>
+<div class="scaleBox">
+  <div class="controlLabel">Scale</div>
+  <input type="range" id="scale" min="0.25" max="3" step="0.01" value="1">
+  <button class="regenerateBtn" onclick="generateNewKTP()">Generate New KTP</button>
 </div>
 <script>
   function randomIntFromInterval(min, max) { // min and max included
@@ -332,7 +273,7 @@
     const minDate = new Date(now.getFullYear() - 78, now.getMonth(), now.getDate());
 
     // Ensure integer timestamp
-    const randomTimestamp = Math.floor(Math.random() * (maxDate - minDate) + minDate.getTime());
+    const randomTimestamp = Math.floor(Math.random() * (maxDate.getTime() - minDate.getTime()) + minDate.getTime());
 
     return new Date(randomTimestamp);
   }
@@ -341,7 +282,7 @@
     const dobDate = generateDOB();
     const randomBirthYear = dobDate.getFullYear().toString().substr(-2).padStart(2, '0');
     const randomBirthMonth = (dobDate.getMonth() + 1).toString().padStart(2, '0');
-    const randomBirthDay = (dobDate.getDate() + (gender == 'male' ? 0 : 40)).toString().padStart(2, '0');
+    const randomBirthDay = (dobDate.getDate() + (gender === 'male' ? 0 : 40)).toString().padStart(2, '0');
     const randomSerialNumber = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     const nik = `${provinceCode}${regencyCode}${randomBirthDay}${randomBirthMonth}${randomBirthYear}${randomSerialNumber}`;
     return { nik, dob: dobDate };
@@ -434,8 +375,8 @@
   function generateNewKTP() {
     try {
       // Check if data is loaded
-      if (typeof indonesiaProvinces === 'undefined' || typeof userImages === 'undefined') {
-        console.error('Data not loaded properly');
+      if (typeof indonesiaProvinces === 'undefined' || typeof userImages === 'undefined' || typeof getRandomIndonesianName === 'undefined' || typeof getRandomIndonesianAddress === 'undefined' || typeof getRandomProvince === 'undefined' || typeof getRandomRegency === 'undefined') {
+        console.error('Data or functions from data.js not loaded properly');
         document.getElementById("provinceDisplay").textContent = "Error: Data not loaded";
         return;
       }
@@ -445,71 +386,55 @@
 
       var rndInt = randomIntFromInterval(0, userImages.length - 1);
       var singleUserSource = userImages[rndInt];
-      var generatedNIK = generateNIK(singleUserSource.gender, selectedProvince.code, selectedRegency.code);
+      var generatedData = generateNIK(singleUserSource.gender, selectedProvince.code, selectedRegency.code.replace('.', ''));
       var randomName = getRandomIndonesianName();
       var randomAddress = getRandomIndonesianAddress();
 
       // Update province display
-      document.getElementById("provinceDisplay").textContent = selectedProvince.name + " - " + selectedRegency.name;
+      document.getElementById("provinceDisplay").textContent = `${selectedProvince.name} - ${selectedRegency.name}`;
 
-      document.getElementsByClassName("profileimg")[0].src = "./" + singleUserSource.source
-      document.getElementsByClassName("nik")[0].value = generateKTP().nik
-      document.getElementsByClassName("name")[0].value = randomName.toUpperCase()
-      document.getElementsByClassName("region")[0].value = "SINGARAJA" + ","
-      document.getElementsByClassName("dob")[0].value = formatDate(generatedNIK.dob)
-      document.getElementsByClassName("jenis")[0].value = singleUserSource.gender == "male" ? "LAKI-LAKI" : "PEREMPUAN"
-      document.getElementsByClassName("golDarah")[0].value = getRandomBloodType()
-      document.getElementsByClassName("alamat")[0].value = randomAddress.substring(0, 25).toUpperCase()
-      document.getElementsByClassName("rt")[0].value = String(Math.floor(Math.random() * 20) + 1).padStart(3, '0') + "/" + String(Math.floor(Math.random() * 20) + 1).padStart(3, '0')
-      document.getElementsByClassName("kel")[0].value = selectedRegency.name
-      document.getElementsByClassName("kec")[0].value = selectedRegency.name
-      document.getElementsByClassName("agama")[0].value = getRandomReligion()
-      document.getElementsByClassName("status")[0].value = getRandomMaritalStatus()
-      document.getElementsByClassName("pek")[0].value = getRandomOccupation()
-      document.getElementsByClassName("kew")[0].value = "WNI"
-      document.getElementsByClassName("ber")[0].value = "SEUMUR HIDUP"
+      document.querySelector(".profileimg").src = `./${singleUserSource.source}`;
+      document.querySelector(".nik").value = generateKTP().nik;
+      document.querySelector(".name").value = randomName.toUpperCase();
+      document.querySelector(".region").value = "SINGARAJA" + ",";
+      document.querySelector(".dob").value = formatDate(generatedData.dob);
+      document.querySelector(".jenis").value = singleUserSource.gender === "male" ? "LAKI-LAKI" : "PEREMPUAN";
+      document.querySelector(".golDarah").value = getRandomBloodType();
+      document.querySelector(".alamat").value = randomAddress.substring(0, 25).toUpperCase();
+      document.querySelector(".rt").value = `${String(Math.floor(Math.random() * 20) + 1).padStart(3, '0')}/${String(Math.floor(Math.random() * 20) + 1).padStart(3, '0')}`;
+      document.querySelector(".kel").value = selectedRegency.name.toUpperCase();
+      document.querySelector(".kec").value = selectedRegency.name.toUpperCase();
+      document.querySelector(".agama").value = getRandomReligion();
+      document.querySelector(".status").value = getRandomMaritalStatus();
+      document.querySelector(".pek").value = getRandomOccupation();
+      document.querySelector(".kew").value = "WNI";
+      document.querySelector(".ber").value = "SEUMUR HIDUP";
 
-      document.getElementsByClassName("province")[0].value = selectedProvince.name.toUpperCase();
-      document.getElementsByClassName("regency")[0].value = selectedRegency.name.toUpperCase();
+      document.querySelector(".province").value = selectedProvince.name.toUpperCase();
+      document.querySelector(".regency").value = selectedRegency.name.toUpperCase();
     } catch (error) {
       console.error('Error generating KTP:', error);
       document.getElementById("provinceDisplay").textContent = "Error generating data";
     }
   }
 
-  // Wait for page to load before generating KTP
-  window.addEventListener('load', function() {
-    // Debug: Check if all required variables are loaded
-    console.log('Page loaded, checking data...');
-    console.log('indonesiaProvinces available:', typeof indonesiaProvinces !== 'undefined');
-    console.log('userImages available:', typeof userImages !== 'undefined');
-    console.log('getRandomProvince function:', typeof getRandomProvince !== 'undefined');
-
-    // Add a small delay to ensure data.js is fully loaded
-    setTimeout(function() {
+  function setupApp() {
+    if (typeof indonesiaProvinces !== 'undefined' && typeof userImages !== 'undefined') {
       generateNewKTP();
-    }, 100);
-  });
+    } else {
+      // Retry after a short delay if data isn't ready
+      setTimeout(setupApp, 100);
+    }
+  }
 
-  // Also try to generate immediately for fallback
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, attempting backup generation...');
-    setTimeout(function() {
-      if (document.getElementById("provinceDisplay").textContent === "Loading...") {
-        generateNewKTP();
-      }
-    }, 500);
-  });
+  window.addEventListener('load', setupApp);
 
   //scale functionality
-  {
-    const ktp = document.getElementById("ktp");
-    const scale = document.getElementById("scale");
-    scale.addEventListener("input", function () {
-      const scaleValue = scale.value;
-      ktp.style.transform = `scale(${scaleValue})`;
-    });
-  }
+  const ktp = document.getElementById("ktp");
+  const scale = document.getElementById("scale");
+  scale.addEventListener("input", function () {
+    ktp.style.transform = `scale(${this.value})`;
+  });
 
   document.addEventListener('DOMContentLoaded', function() {
     const nikInput = document.querySelector('.nik');
@@ -537,9 +462,8 @@
 
       const start = e.target.selectionStart;
       const end = e.target.selectionEnd;
-      const currentValue = e.target.value;
 
-      e.target.value = currentValue.substring(0, start) + cleanData + currentValue.substring(end);
+      e.target.value = e.target.value.substring(0, start) + cleanData + e.target.value.substring(end);
       e.target.setSelectionRange(start + cleanData.length, start + cleanData.length);
     });
   });
